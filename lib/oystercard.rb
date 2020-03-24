@@ -27,12 +27,10 @@ class Oystercard
   def touch_in
     fail 'Not sufficient amount' if @balance < MIN_CHARGE
     @in_journey = true
-    @in_journey
   end
 
   def touch_out
     @in_journey = false
-    @in_journey
   end
 
 end

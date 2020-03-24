@@ -1,6 +1,7 @@
 require './lib/oystercard.rb'
 
 describe Oystercard do
+
   it 'has a default balance of 0' do
     expect(subject.balance).to eq (0)
   end
@@ -9,25 +10,26 @@ describe Oystercard do
     expect(subject).not_to be_in_journey
   end
 
-  describe '#touch_in' do
-    it 'can touch in' do
+  context 'touching in and out' do
+    before(:each) do
       subject.top_up(Oystercard::MAXIMUM_BALANCE)
+    end
+
+    it 'can touch in' do
       subject.touch_in
       expect(subject).to be_in_journey
     end
 
-    it 'throws an error if ther is not sufficient money inythe card' do
-      expect{ subject.touch_in }.to raise_error 'Not sufficient amount'
+    it 'can touch out' do
+      subject.touch_in
+      subject.touch_out
+      expect(subject).not_to be_in_journey
     end
-  end
+end
 
-  it 'can touch out' do
-    subject.top_up(Oystercard::MAXIMUM_BALANCE)
-    subject.touch_in
-    subject.touch_out
-    expect(subject).not_to be_in_journey
+  it 'throws an error if there is not sufficient money in the card' do
+    expect{ subject.touch_in }.to raise_error 'Not sufficient amount'
   end
-
 
   describe '#top_up' do
     it 'top ups the balance by the top-up amount' do
