@@ -2,7 +2,8 @@ require './lib/oystercard.rb'
 
 describe Oystercard do
 
-  let(:station){ double :station }
+  let(:entry_station){ double :station }
+  let(:exit_station){ double :station }
 
   it 'has a default balance of 0' do
     expect(subject.balance).to eq (0)
@@ -12,10 +13,15 @@ describe Oystercard do
     expect(subject).not_to be_in_journey
   end
 
+  it 'has an empty list of journeys' do
+    expect(subject.journeys).to be_empty
+  end
+
+
   context 'touching in and out' do
     before(:each) do
       subject.top_up(Oystercard::MAXIMUM_BALANCE)
-      subject.touch_in(station)
+      subject.touch_in(entry_station)
     end
 
     it 'is in journey after touch in' do
@@ -23,22 +29,33 @@ describe Oystercard do
     end
 
     it 'is not in journey after touch out' do
-      subject.touch_out
+      subject.touch_out(exit_station)
       expect(subject).not_to be_in_journey
     end
 
     it 'deducts the journey fare from the balance after touching out' do
-      expect{ subject.touch_out }.to change{ subject.balance }.by(- Oystercard::MIN_CHARGE)
+      expect{ subject.touch_out(exit_station) }.to change{ subject.balance }.by(- Oystercard::MIN_CHARGE)
     end
 
     it 'stores the entry station' do
-      # subject.touch_in(station)
-      expect(subject.entry_station).to eq station
+      expect(subject.entry_station).to eq entry_station
     end
+
+    it 'stores the exit station' do
+      subject.touch_out(exit_station)
+      expect(subject.exit_station).to eq exit_station
+    end
+
+    let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+
+      it 'stores the journey' do
+        subject.touch_out(exit_station)
+        expect(subject.journeys).to include journey
+      end
 end
 
   it 'throws an error if there is not sufficient money in the card when touch in' do
-    expect{ subject.touch_in(station) }.to raise_error 'Not sufficient amount'
+    expect{ subject.touch_in(entry_station) }.to raise_error 'Not sufficient amount'
   end
 
   describe '#top_up' do
