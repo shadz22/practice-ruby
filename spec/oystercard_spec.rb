@@ -2,6 +2,8 @@ require './lib/oystercard.rb'
 
 describe Oystercard do
 
+  let(:station){ double :station }
+
   it 'has a default balance of 0' do
     expect(subject.balance).to eq (0)
   end
@@ -13,22 +15,30 @@ describe Oystercard do
   context 'touching in and out' do
     before(:each) do
       subject.top_up(Oystercard::MAXIMUM_BALANCE)
+      subject.touch_in(station)
     end
 
-    it 'can touch in' do
-      subject.touch_in
+    it 'is in journey after touch in' do
       expect(subject).to be_in_journey
     end
 
-    it 'can touch out' do
-      subject.touch_in
+    it 'is not in journey after touch out' do
       subject.touch_out
       expect(subject).not_to be_in_journey
     end
+
+    it 'deducts the journey fare from the balance after touching out' do
+      expect{ subject.touch_out }.to change{ subject.balance }.by(- Oystercard::MIN_CHARGE)
+    end
+
+    it 'stores the entry station' do
+      # subject.touch_in(station)
+      expect(subject.entry_station).to eq station
+    end
 end
 
-  it 'throws an error if there is not sufficient money in the card' do
-    expect{ subject.touch_in }.to raise_error 'Not sufficient amount'
+  it 'throws an error if there is not sufficient money in the card when touch in' do
+    expect{ subject.touch_in(station) }.to raise_error 'Not sufficient amount'
   end
 
   describe '#top_up' do
@@ -45,16 +55,6 @@ end
       maximum_balance = Oystercard::MAXIMUM_BALANCE
       subject.top_up(maximum_balance)
       expect{ subject.top_up(1)}.to raise_error 'Maximum balance of #{MAXIMUM_BALANCE} exceeded'
-    end
-  end
-
-  describe '#deduct' do
-
-    it { is_expected.to respond_to(:deduct).with(1).argument }
-
-    it 'deducts the amount form the balance' do
-      subject.top_up(30)
-      expect{ subject.deduct(5)}.to change{ subject.balance }.by -5
     end
   end
 end
