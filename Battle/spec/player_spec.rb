@@ -18,6 +18,19 @@ describe Player do
     end
   end
 
+  describe '#attack' do
+    it 'damages the player' do
+      
+      expect(james).to receive(:receive_damage)
+      shadi.attack(james)
+    end
+  end
 
-  
+  describe '#receive_damage' do
+    it 'deducts 10 hit points' do
+      expect { shadi.receive_damage }.to change {shadi.hit_points}.by(-10)
+    end
+  end
+
+
 end
