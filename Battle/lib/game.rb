@@ -19,4 +19,14 @@ class Game
     @players.last
   end
 
+  def switch_turn
+    @current_turn = opponent_of(current_turn)
+  end
+
+  private
+
+  def opponent_of(current_turn)
+    @players.select { |player| player != current_turn }.first
+  end
+
 end
