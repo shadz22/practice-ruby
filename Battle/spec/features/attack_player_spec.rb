@@ -14,5 +14,14 @@ feature 'Deduct Hit points' do
     click_button 'Attack'
     expect(page).to have_content 'James: 50HP'
   end
+end
 
+feature 'Player 2 attacks player 1' do
+  scenario 'player 1 see the confirmation of the attack' do
+    sign_in_and_play
+    click_button 'Attack'
+    click_button 'OK'
+    click_button 'Attack'
+    expect(page).to have_content 'Shadi: 50HP'
+  end
 end
