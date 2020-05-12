@@ -5,6 +5,6 @@ feature 'register player name' do
     visit '/'
     fill_in :player_1_name, with: 'Shadi'
     click_button 'Submit'
-    expect(page).to have_content 'Hello Shadi!'
+    expect(page).to have_content 'Shadi Vs Computer'
   end
 end
