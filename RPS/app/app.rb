@@ -1,4 +1,6 @@
 require 'sinatra/base'
+require './lib/computer'
+require './lib/game'
 
 class RPS < Sinatra::Base
 
@@ -19,14 +21,13 @@ class RPS < Sinatra::Base
   end
 
   post '/outcome' do
-    session[:player_1_shape] = params[:player_1_shape]
+    session[:player_shape] = params[:player_shape]
     session[:computer_shape] = Computer.new.shape
     redirect '/outcome'
   end
 
   get '/outcome' do
-    @player_1_shape = session[:player_1_shape]
-    @computer_shape = session[:computer_shape]
+    @game = Game.new(session)
     erb :outcome
   end
 
