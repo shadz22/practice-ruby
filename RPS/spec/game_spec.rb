@@ -40,6 +40,12 @@ describe Game do
         expect(game_lose.lose?).to eq true
       end
     end
+
+    describe '#draw' do
+      it 'returns true whe both player and computer select the same shape' do
+        expect(game_draw.draw?).to eq true
+      end
+    end
   end
 
 end
