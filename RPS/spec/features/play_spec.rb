@@ -31,4 +31,17 @@ feature 'play the game' do
     click_button 'Rock'
     expect(page).to have_content "Computer chose Scissors"
   end
+
+  context 'end game' do
+
+    before do
+      srand(PLAY_SEED)
+    end
+
+    scenario 'I win' do
+      click_button 'Rock'
+      expect(page).to have_content 'You win!'
+    end
+  end
+
 end

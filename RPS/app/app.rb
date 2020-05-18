@@ -21,7 +21,7 @@ class RPS < Sinatra::Base
   end
 
   post '/outcome' do
-    session[:player_shape] = params[:player_shape]
+    session[:player_shape] = params[:player_shape].downcase.to_sym
     session[:computer_shape] = Computer.new.shape
     redirect '/outcome'
   end
