@@ -18,6 +18,10 @@ class Game
     result == :win
   end
 
+  def lose?
+    result == :lose
+  end
+
   private 
 
   def result

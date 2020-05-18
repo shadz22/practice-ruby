@@ -23,9 +23,19 @@ describe Game do
   end
 
   context 'end game' do
+    subject(:game_lose) { described_class.new(lose_option) }
+    
+    let(:lose_option) { {'player_name' => 'Shadi', 'player_shape' => :rock, 'computer_shape' => :paper} }
+    
     describe '#win?' do
       it 'returns true if player chooses :rock and computer chooses :scissors' do
         expect(game.win?).to eq true
+      end
+    end
+
+    describe '#lose?' do
+      it 'returns true if player chooses :rock and computer chooses :paper' do
+        expect(game_lose.lose?).to eq true
       end
     end
   end

@@ -42,6 +42,11 @@ feature 'play the game' do
       click_button 'Rock'
       expect(page).to have_content 'You win!'
     end
+
+    scenario 'I lose' do
+      click_button 'Paper'
+      expect(page).to have_content 'You lose!'
+    end
   end
 
 end

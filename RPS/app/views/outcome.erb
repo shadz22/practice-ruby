@@ -6,4 +6,6 @@ Computer chose <%= @game.computer_shape.to_s.capitalize %>
 
 <% if @game.win? %>
 You win!
+<% elsif @game.lose? %>
+You lose!
 <% end %>
