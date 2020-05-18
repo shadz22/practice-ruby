@@ -18,13 +18,15 @@ class RPS < Sinatra::Base
     erb :play
   end
 
-  post '/play' do
+  post '/outcome' do
     session[:player_1_shape] = params[:player_1_shape]
+    session[:computer_shape] = :rock
     redirect '/outcome'
   end
 
   get '/outcome' do
     @player_1_shape = session[:player_1_shape]
+    @computer_shape = session[:computer_shape]
     erb :outcome
   end
 
