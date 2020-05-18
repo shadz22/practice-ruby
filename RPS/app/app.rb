@@ -20,7 +20,7 @@ class RPS < Sinatra::Base
 
   post '/outcome' do
     session[:player_1_shape] = params[:player_1_shape]
-    session[:computer_shape] = :rock
+    session[:computer_shape] = Computer.new.shape
     redirect '/outcome'
   end
 

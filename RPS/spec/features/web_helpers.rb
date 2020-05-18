@@ -5,5 +5,5 @@ def sign_in_and_play
 end
 
 def possible_message
-  [:rock, :paper, :scissors].map { |shape| "Computer chose #{shape.to_s.capitalize}!"}
+  [:rock, :paper, :scissors].map { |shape| "Computer chose #{shape.to_s.capitalize}" }
 end
