@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require './lib/bookmark'
 
 class BookmarkManager < Sinatra::Base
   get '/' do
@@ -7,11 +8,7 @@ class BookmarkManager < Sinatra::Base
 
   get '/bookmarks' do
     
-    @bookmarks = [
-    'http://www.google.com',
-    'http://www.bbc.co.uk',
-    'http://www.msn.com'
-    ]
+    @bookmarks = Bookmark.all
     erb :'bookmarks/index'
     
   end
