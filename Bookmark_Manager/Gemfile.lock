@@ -84,7 +84,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   rspec
-  rubocop
+  rubocop (= 0.84.0)
   simplecov
   simplecov-console
   sinatra
