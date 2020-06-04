@@ -1,0 +1,1 @@
+ALERT TABLE bookmarks ADD COLUMN title VARCHAR(60);
