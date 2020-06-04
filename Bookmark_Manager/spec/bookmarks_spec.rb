@@ -23,10 +23,13 @@ describe Bookmark do
 
   describe '.create' do
     it 'adds a new bookmark' do
-      bookmarks = Bookmark.create(url: 'http://www.twitter.com', title: 'Twitter').first #creates a hash of the new bookmark {"id"=>"591", "url"=>"http://www.twitter.com", "title"=>"Twitter"}
+      bookmark = Bookmark.create(url: 'http://www.twitter.com', title: 'Twitter') #creates a hash of the new bookmark {"id"=>"591", "url"=>"http://www.twitter.com", "title"=>"Twitter"}
+      persisted_data = PG.connect(dbname: 'bookmark_manager_test').query("SELECT * FROM bookmarks WHERE id = #{bookmark.id};")
     
-      expect(bookmarks['url']).to eq 'http://www.twitter.com'
-      expect(bookmarks['title']).to eq 'Twitter'
+      expect(bookmark).to be_a Bookmark
+      expect(bookmark.id).to eq persisted_data.first['id']
+      expect(bookmark.url).to eq 'http://www.twitter.com'
+      expect(bookmark.title).to eq 'Twitter'
     end
   end
 end
