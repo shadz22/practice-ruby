@@ -54,4 +54,16 @@ describe Bookmark do
       expect(updated_bookmark.url).to eq 'http://www.checking.com'
     end
   end
+
+  describe '.find' do
+    it 'finds the specific bookmark based on the bookmark id' do
+      bookmark = Bookmark.create(url: 'http://www.codecademy.com', title: 'Codecademy')
+      result = Bookmark.find(id: bookmark.id)
+
+      expect(result).to be_a Bookmark
+      expect(result.id).to eq bookmark.id
+      expect(result.title).to eq 'Codecademy'
+      expect(result.url).to eq 'http://www.codecademy.com'
+    end
+  end
 end
