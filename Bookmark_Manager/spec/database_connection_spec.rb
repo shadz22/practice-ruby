@@ -6,4 +6,10 @@ describe '.setup' do
 
     DatabaseConnection.setup('bookmark_manager_test')
   end
+
+  it 'the connection is persistent' do
+    connection = DatabaseConnection.setup('bookmark_manager_test')
+
+    expect(DatabaseConnection.connection).to eq connection
+  end
 end
