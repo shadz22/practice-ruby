@@ -33,6 +33,10 @@ describe Bookmark do
       expect(bookmark.title).to eq 'Twitter'
     end
 
+    it "doesn't let the user to add invalid url" do
+      Bookmark.create(url: 'not a valid url', title: 'not valid')
+      expect(Bookmark.all).to be_empty
+    end
   end
 
   describe '.delete' do
