@@ -3,7 +3,7 @@ require 'pg'
 
 feature 'Delete a bookmark' do
   scenario 'user can delete a bookmark from the list' do
-    bookmark = Bookmark.create(url: 'http://www.testing.com', title: 'Testing')
+    Bookmark.create(url: 'http://www.testing.com', title: 'Testing')
     visit '/bookmarks'
     expect(page).to have_link('Testing', href: 'http://www.testing.com')
 
