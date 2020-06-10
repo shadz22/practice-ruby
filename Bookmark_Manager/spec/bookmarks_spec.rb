@@ -71,4 +71,15 @@ describe Bookmark do
       expect(result.url).to eq 'http://www.codecademy.com'
     end
   end
+
+  describe '#comments' do
+    it 'shows all the comments for the bookmark' do
+      bookmark = Bookmark.create(url: 'http://www.testingcomments.com', title: 'Testing Comments')
+      DatabaseConnection.query("INSERT INTO comments (id, text, bookmark_id) VALUES (1, 'This is a test for comments', #{bookmark.id});")
+
+      comment = bookmark.comments.first
+
+      expect(comment['text']).to eq 'This is a test for comments'
+    end
+  end
 end
