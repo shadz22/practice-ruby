@@ -1,4 +1,5 @@
 require_relative 'database_connection'
+require_relative 'comment'
 
 class Bookmark
 
@@ -47,14 +48,8 @@ class Bookmark
     Bookmark.new(id: result[0]['id'], title: result[0]['title'], url: result[0]['url'])
   end
 
-  def comments
-    # if ENV['ENVIRONMENT'] == 'test'
-    #   DatabaseConnection.setup('bookmark_manager_test')
-    # else
-    #   DatabaseConnection.setup('bookmark_manager')
-    # end
-
-    DatabaseConnection.query("SELECT * FROM comments WHERE bookmark_id = '#{id}';")
+  def comments(comment_class = Comment)
+    comment_class.where(bookmark_id: id)
   end
 
   private
