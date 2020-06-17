@@ -1,6 +1,7 @@
 require 'comment'
 require 'bookmark'
 require 'database_helpers'
+require 'spec_helper'
 
 describe Comment do
   describe '.create' do
