@@ -92,4 +92,22 @@ describe Bookmark do
       bookmark.tags(tag_class)
     end
   end
+
+  describe '.where' do
+    it 'returns all bookmarks that have the same tag' do
+      bookmark = Bookmark.create(url: 'http://www.bbc.co.uk', title: 'BBC')
+      tag1 = Tag.create(content: 'tag1 test')
+      tag2 = Tag.create(content: 'tag2 test')
+      BookmarkTag.create(bookmark_id: bookmark.id, tag_id: tag1.id)
+      BookmarkTag.create(bookmark_id: bookmark.id, tag_id: tag2.id)
+
+      bookmarks = Bookmark.where(tag_id: tag1.id)
+      result = bookmarks.first
+
+      expect(bookmarks.length).to eq 1
+      expect(result.id).to eq bookmark.id
+      expect(result.url).to eq bookmark.url
+      expect(result.title).to eq bookmark.title
+    end
+  end
 end
