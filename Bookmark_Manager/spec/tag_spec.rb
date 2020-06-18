@@ -6,14 +6,24 @@ require 'bookmark_tag'
 describe Tag do
 
   describe '.create' do
-    it 'creates a new tag' do
-      tag = Tag.create(content: 'Testing a tag')
+    context "tag doesn't exist" do
+      it 'creates a new tag' do
+        tag = Tag.create(content: 'Testing a tag')
 
-      persisted_data = persisted_data(table: 'tags', id: tag.id)
+        persisted_data = persisted_data(table: 'tags', id: tag.id)
 
-      expect(tag).to be_a Tag
-      expect(tag.id).to eq persisted_data['id']
-      expect(tag.content). to eq 'Testing a tag'
+        expect(tag).to be_a Tag
+        expect(tag.id).to eq persisted_data['id']
+        expect(tag.content). to eq 'Testing a tag'
+      end
+    end
+    context 'tag already exists' do
+      it 'return the existing tag' do
+       tag1 = Tag.create(content: 'Testing a tag')
+       tag2 = Tag.create(content: 'Testing a tag')
+
+       expect(tag2.id).to eq tag1.id
+      end
     end
   end
 
@@ -34,4 +44,8 @@ describe Tag do
       expect(tag.content).to eq tag1.content
     end
   end
+
+  # describe '.find' do
+  #   it 'finds all the tags with the same id' do
+
 end

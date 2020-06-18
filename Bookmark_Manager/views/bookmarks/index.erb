@@ -8,15 +8,19 @@
         <input type='hidden' name='_method' value='DELETE' />
         <input type='submit' value='Delete' />
       </form>
+
       <form action='/bookmarks/<%= bookmark.id %>/edit' method='get'>
         <input type='submit' value='Edit'>
       </form>
+
       <form action="/bookmarks/<%= bookmark.id %>/comments/new" method='get'>
         <input type='submit' value='Add Comment'>
       </form>
+
       <form action="/bookmarks/<%= bookmark.id %>/tags/new" method='get'>
         <input type='submit' value='Add Tag'>
       </form>
+
       <div>
         <h2> Comments </h2>
           <ul>
@@ -25,11 +29,16 @@
             <% end %>
           </ul>
       </div>
+
       <div>
         <h2> Tags </h2>
           <ul>
             <% bookmark.tags.each do |tag| %>
-              <li><%= tag.content %></li>
+              <li>
+                <a href="/tags/<%= tag.id %>/bookmarks">
+                  <%= tag.content %>
+                </a>
+              </li>
             <% end %>
           </ul>
       </div>
@@ -37,6 +46,7 @@
     </li>
   <% end %>
 </ul>
+
 <p>
   <%= flash[:notice] %>
 </p>

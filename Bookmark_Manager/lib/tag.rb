@@ -10,8 +10,11 @@ class Tag
   end
 
   def self.create(content:)
-    result = DatabaseConnection.query("INSERT INTO tags (content) VALUES ('#{content}') RETURNING id, content;")
-    Tag.new(id: result[0]['id'], content: result[0]['content'])
+    result = DatabaseConnection.query("SELECT * FROM tags WHERE content = '#{content}';").first
+    if !result
+      result = DatabaseConnection.query("INSERT INTO tags (content) VALUES ('#{content}') RETURNING id, content;").first
+    end
+      Tag.new(id: result['id'], content: result['content'])
   end
 
   def self.where(bookmark_id:)
