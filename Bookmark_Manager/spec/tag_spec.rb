@@ -5,6 +5,8 @@ require 'bookmark_tag'
 
 describe Tag do
 
+  let(:bookmark_class) { double(:bookmark_class) }
+
   describe '.create' do
     context "tag doesn't exist" do
       it 'creates a new tag' do
@@ -52,6 +54,15 @@ describe Tag do
 
       expect(result.id).to eq tag.id
       expect(result.content).to eq 'Test tag'
+    end
+  end
+
+  describe '#bookmarks' do
+    it 'calls .where on the Bookmark class' do
+      tag = Tag.create(content: 'Test tag')
+
+      expect(bookmark_class).to receive(:where).with(tag_id: tag.id)
+      tag.bookmarks(bookmark_class)
     end
   end
 

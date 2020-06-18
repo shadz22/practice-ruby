@@ -29,4 +29,8 @@ class Tag
     Tag.new(id: result[0]['id'], content: result[0]['content'])
   end
 
+  def bookmarks(bookmark_class = Bookmark)
+    bookmark_class.where(tag_id: id)
+  end
+
 end
