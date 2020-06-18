@@ -4,6 +4,7 @@ require 'uri'
 require './lib/bookmark'
 require './lib/tag'
 require './lib/comment'
+require './lib/bookmark_tag'
 require './database_connection_setup'
 # require './spec/spec_helper'
 
@@ -60,11 +61,8 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/bookmarks/:id/tags' do
-    p params[:id]
-    p params
     tag = Tag.create(content: params[:tag])
-    # connection = PG.connect(dbname: 'bookmark_manager_test')
-    # connection.exec("INSERT INTO tags (content) VALUES ('#{params[:tag]}') RETURNING id, content;")
+    bookmark_tag = BookmarkTag.create(bookmark_id: params[:id], tag_id: tag.id)
     redirect '/bookmarks'
   end
 

@@ -11,6 +11,8 @@ describe BookmarkTag do
       bookmark_tag = BookmarkTag.create(bookmark_id: bookmark.id, tag_id: tag.id)
 
       expect(bookmark_tag).to be_a BookmarkTag
+      expect(bookmark_tag.bookmark_id).to eq bookmark.id
+      expect(bookmark_tag.tag_id).to eq tag.id
     end
   end
 end
