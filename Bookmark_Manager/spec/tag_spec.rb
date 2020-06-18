@@ -30,6 +30,8 @@ describe Tag do
       tag = tags.first
 
       expect(tags.length).to eq 2
+      expect(tag.id).to eq tag1.id
+      expect(tag.content).to eq tag1.content
     end
   end
 end
