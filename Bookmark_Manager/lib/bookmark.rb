@@ -1,6 +1,7 @@
 require_relative './database_connection'
 require 'uri'
 require_relative 'comment'
+require_relative 'tag'
 
 class Bookmark
 
@@ -13,12 +14,6 @@ class Bookmark
   end
 
   def self.all
-    if ENV['ENVIRONMENT'] == 'test'
-      DatabaseConnection.setup('bookmark_manager_test')
-    else
-      DatabaseConnection.setup('bookmark_manager')
-    end
-    # DatabaseConnection.setup('bookmark_manager_test')
     result = DatabaseConnection.query("SELECT * FROM bookmarks;")
     result.map { |bookmark| # by using map we turn the database object into an array, where each bookmark hash is an element of the array                               
       Bookmark.new(id: bookmark['id'], title: bookmark['title'], url: bookmark['url'])
@@ -26,12 +21,6 @@ class Bookmark
   end
 
   def self.create(url:, title:)
-    if ENV['ENVIRONMENT'] == 'test'
-      DatabaseConnection.setup('bookmark_manager_test')
-    else
-      DatabaseConnection.setup('bookmark_manager')
-    end
-    # DatabaseConnection.setup('bookmark_manager_test')
     return false unless is_url?(url)
     result = DatabaseConnection.query("INSERT INTO bookmarks (url, title) VALUES ('#{url}', '#{title}') RETURNING id, url, title;")
     Bookmark.new(id: result[0]['id'], title: result[0]['title'], url: result[0]['url'])
@@ -53,6 +42,10 @@ class Bookmark
 
   def comments(comment_class = Comment)
     comment_class.where(bookmark_id: id)
+  end
+
+  def tags(tag_class = Tag)
+    tag_class.where(bookmark_id: id)
   end
 
   private

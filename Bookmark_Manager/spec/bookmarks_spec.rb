@@ -5,7 +5,6 @@ require 'database_helpers'
 describe Bookmark do
   describe '.all' do
     it 'returns a list of all the bookmarks' do
-      # connection = PG.connect(dbname: 'bookmark_manager_test')
 
       bookmark = Bookmark.create(url: 'http://www.google.com', title: 'Google')
       Bookmark.create(url: 'http://www.bbc.co.uk', title: 'BBC')
@@ -80,6 +79,17 @@ describe Bookmark do
       expect(comment_class).to receive(:where).with(bookmark_id: bookmark.id)
 
       bookmark.comments(comment_class)
+    end
+  end
+
+  let(:tag_class) { double(:tag_class) }
+  
+  describe '#tags' do
+    it 'calls .where on the Tag class' do
+      bookmark = Bookmark.create(url: 'http://www.testing.com', title: 'Testing')
+      expect(tag_class).to receive(:where).with(bookmark_id: bookmark.id)
+
+      bookmark.tags(tag_class)
     end
   end
 end

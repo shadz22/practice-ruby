@@ -14,4 +14,7 @@ describe Tag do
       expect(tag.content). to eq 'Testing a tag'
     end
   end
+
+  # describe '.where' do
+  #   it 'returns all tags assigned to a specific bookmark id' do
 end

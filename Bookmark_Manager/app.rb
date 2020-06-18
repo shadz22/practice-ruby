@@ -2,6 +2,8 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require 'uri'
 require './lib/bookmark'
+require './lib/tag'
+require './lib/comment'
 require './database_connection_setup'
 # require './spec/spec_helper'
 
