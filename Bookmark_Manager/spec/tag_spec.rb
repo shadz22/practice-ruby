@@ -45,7 +45,14 @@ describe Tag do
     end
   end
 
-  # describe '.find' do
-  #   it 'finds all the tags with the same id' do
+  describe '.find' do
+    it 'finds all the tags with the same id' do
+      tag = Tag.create(content: 'Test tag')
+      result = Tag.find(id: tag.id)
+
+      expect(result.id).to eq tag.id
+      expect(result.content).to eq 'Test tag'
+    end
+  end
 
 end
