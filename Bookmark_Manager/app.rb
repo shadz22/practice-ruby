@@ -76,7 +76,8 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/users' do
-    
+    User.create(email: params[:email], password: params[:password])
+    redirect '/bookmarks'
   end
 
   run! if app_file == $0
