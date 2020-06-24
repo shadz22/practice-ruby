@@ -71,6 +71,14 @@ class BookmarkManager < Sinatra::Base
     erb :'tags/index'
   end
 
+  get '/users/new' do
+    erb :'users/new'
+  end
+
+  post '/users' do
+    
+  end
+
   run! if app_file == $0
 end
   
