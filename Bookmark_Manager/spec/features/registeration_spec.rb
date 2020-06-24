@@ -7,11 +7,11 @@ feature 'registeration' do
 
     expect(current_path).to eq  '/users/new'
 
-    # fill_in :email, with: 'example123@gmail.com'
-    # fill_in :password, with: 'password123'
-    # click_button 'Submit'
+    fill_in :email, with: 'example123@gmail.com'
+    fill_in :password, with: 'password123'
+    click_button 'Submit'
 
-    # expect(page).to have_content 'Welcome, example123@gmail.com'
-    # expect(current_path).to eq '/bookmarks'
+    expect(page).to have_content 'Welcome, example123@gmail.com'
+    expect(current_path).to eq '/bookmarks'
   end
 end

@@ -5,6 +5,7 @@ require './lib/bookmark'
 require './lib/tag'
 require './lib/comment'
 require './lib/bookmark_tag'
+require './lib/user'
 require './database_connection_setup'
 # require './spec/spec_helper'
 
