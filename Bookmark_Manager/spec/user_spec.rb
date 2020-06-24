@@ -13,6 +13,12 @@ describe User do
       expect(user).to be_a User
       expect(user.email).to eq 'test123@gmail.com'
     end
+
+    it 'hashes the password using BCrypt' do
+      expect(BCrypt::Password).to receive(:create).with('password123')
+
+      User.create(email: 'test123@gmail.com', password: 'password123')
+    end
   end
 
   describe '.find' do
