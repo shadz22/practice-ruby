@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 feature 'Switch between players' do
@@ -10,7 +12,6 @@ feature 'Switch between players' do
     sign_in_and_play
     click_button 'Attack'
     expect(page).not_to have_content 'James: 60HP'
-    expect(page).to have_content "James: 50HP"
-    
+    expect(page).to have_content 'James: 50HP'
   end
 end

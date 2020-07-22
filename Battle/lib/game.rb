@@ -1,9 +1,10 @@
-class Game
+# frozen_string_literal: true
 
+class Game
   attr_reader :current_turn
 
   def initialize(player_1, player_2)
-    @players =[player_1, player_2]
+    @players = [player_1, player_2]
     @current_turn = player_1
   end
 
@@ -24,10 +25,10 @@ class Game
   end
 
   def opponent_of(current_turn)
-    @players.select { |player| player != current_turn }.first
+    @players.reject { |player| player == current_turn }.first
   end
 
-  private 
-  attr_reader :players
+  private
 
+  attr_reader :players
 end

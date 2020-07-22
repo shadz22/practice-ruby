@@ -21,10 +21,10 @@ describe Tag do
     end
     context 'tag already exists' do
       it 'return the existing tag' do
-       tag1 = Tag.create(content: 'Testing a tag')
-       tag2 = Tag.create(content: 'Testing a tag')
+        tag1 = Tag.create(content: 'Testing a tag')
+        tag2 = Tag.create(content: 'Testing a tag')
 
-       expect(tag2.id).to eq tag1.id
+        expect(tag2.id).to eq tag1.id
       end
     end
   end

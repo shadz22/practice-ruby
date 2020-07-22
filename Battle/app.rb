@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra/base'
 require './lib/player'
 require './lib/game'
@@ -32,6 +34,5 @@ class Battle < Sinatra::Base
     redirect '/play'
   end
 
-
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

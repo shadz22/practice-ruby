@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 # require 'spec_helper'
 require 'player'
 
 describe Player do
-
   subject(:shadi) { Player.new('Shadi') }
   subject(:james) { Player.new('James') }
-  
+
   describe '#name' do
     it 'returns its name' do
       expect(shadi.name).to eq 'Shadi'
@@ -20,9 +21,7 @@ describe Player do
 
   describe '#receive_damage' do
     it 'deducts 10 hit points' do
-      expect { shadi.receive_damage }.to change {shadi.hit_points}.by(-10)
+      expect { shadi.receive_damage }.to change { shadi.hit_points }.by(-10)
     end
   end
-
-
 end

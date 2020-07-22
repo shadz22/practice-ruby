@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'game'
 
 describe Game do
@@ -42,5 +44,4 @@ describe Game do
       expect(game.opponent_of(player_2)).to eq player_1
     end
   end
-  
 end

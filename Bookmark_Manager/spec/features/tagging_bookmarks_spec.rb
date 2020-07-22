@@ -48,5 +48,3 @@ feature 'to see all the bookmarks that have a same tag' do
     expect(page).not_to have_link 'Udemy', href: 'http://www.udemy.com'
   end
 end
-
-

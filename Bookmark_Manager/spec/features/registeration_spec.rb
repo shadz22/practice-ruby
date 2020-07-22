@@ -5,7 +5,7 @@ feature 'registeration' do
     visit '/'
     click_button 'Sign Up'
 
-    expect(current_path).to eq  '/users/new'
+    expect(current_path).to eq '/users/new'
 
     fill_in :email, with: 'example123@gmail.com'
     fill_in :password, with: 'password123'
