@@ -14,8 +14,9 @@ class Bookmark
   end
 
   def self.all
-    result = DatabaseConnection.query("SELECT * FROM bookmarks;")
-    result.map { |bookmark| # by using map we turn the database object into an array, where each bookmark hash is an element of the array                               
+    p result = DatabaseConnection.query("SELECT * FROM bookmarks;")
+    p 'shadiiiii'
+    p result.map { |bookmark| # by using map we turn the database object into an array, where each bookmark hash is an element of the array                               
       Bookmark.new(id: bookmark['id'], title: bookmark['title'], url: bookmark['url'])
     }    
   end
